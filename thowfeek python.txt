@@ -1,0 +1,48 @@
+# Define a dictionary to store the product information
+    print(f"ID: {id}, Name: {product['name']}, Price: {product['price']}, Quantity: {product['quantity']}")
+
+# Function to buy a product
+def buy_product(id, quantity):
+  if id in products:
+    product = products[id]
+    if product["quantity"] >= quantity:
+      # Calculate the total amount of the product
+      total_amount = product["price"] * quantity
+      print(f"Product {product['name']} purchased. Remaining quantity: {product['quantity'] - quantity}")
+      product["quantity"] -= quantity
+      return total_amount
+    else:
+      print("Insufficient quantity!")
+  else:
+    print("Product not found!")
+
+# Main program
+while True:
+  print("Supermarket Management System")
+  print("----------------------------")
+  print("1. Add product")
+  print("2. Display products")
+  print("3. Buy product")
+  print("4. Exit")
+  choice = input("Enter your choice: ")
+
+  if choice == "1":
+    id = input("Enter ID number: ")
+    name = input("Enter product name: ")
+    price = float(input("Enter price: "))
+    quantity = int(input("Enter quantity: "))
+    add_product(id, name, price, quantity)
+  elif choice == "2":
+    display_products()
+  elif choice == "3":
+    id = input("Enter ID number of the product you want to buy: ")
+    quantity = int(input("Enter quantity: "))
+    total_amount = buy_product(id, quantity)
+    if total_amount:
+      print(f"Total amount paid: {total_amount}")
+  elif choice == "4":
+    break
+  else:
+    print("Invalid choice. Please try again.")
+
+print("Goodbye!")
